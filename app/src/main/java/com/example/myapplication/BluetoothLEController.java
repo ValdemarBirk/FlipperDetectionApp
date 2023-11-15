@@ -13,6 +13,14 @@ import android.content.ContextWrapper;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @SuppressLint("MissingPermission")
 
 public class BluetoothLEController extends Activity {
@@ -22,8 +30,13 @@ public class BluetoothLEController extends Activity {
 
     private BluetoothLeScanner bluetoothLeScanner;
 
+    private RecyclerViewAdapterFlipper adapter;
+
+    private LeDeviceListAdapter leDeviceListAdapter = new LeDeviceListAdapter();
+
 
     public BluetoothLEController() {
+
     }
     private boolean scanning;
     private Handler handler = new Handler();
@@ -33,33 +46,27 @@ public class BluetoothLEController extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
         bluetoothManager = this.getSystemService(BluetoothManager.class);
         bluetoothAdapter = bluetoothManager.getAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
+        RecyclerView rw = findViewById(R.id.flippersFoundRecycler);
+        rw.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new RecyclerViewAdapterFlipper(this, leDeviceListAdapter);
+        rw.setAdapter(adapter);
+
         scanLeDevice();
     }
 
 
     public void scanLeDevice() {
-        if (!scanning) {
-            // Stops scanning after a predefined scan period.
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    scanning = false;
-                    bluetoothLeScanner.stopScan(leScanCallback);
-                }
-            }, SCAN_PERIOD);
-            scanning = true;
-            bluetoothLeScanner.startScan(leScanCallback);
-        } else {
-            scanning = false;
-            bluetoothLeScanner.stopScan(leScanCallback);
-        }
+        bluetoothLeScanner.startScan(leScanCallback);
     }
 
-
-    private LeDeviceListAdapter leDeviceListAdapter = new LeDeviceListAdapter();
+    private int numberOfScans = 0;
 
     // Device scan callback.
     private ScanCallback leScanCallback =
@@ -67,15 +74,21 @@ public class BluetoothLEController extends Activity {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
                     super.onScanResult(callbackType, result);
-                    if(result.getDevice().getAddress().startsWith("80:E1")){
+                    numberOfScans++;
+                    if(result.getDevice().getAddress().startsWith("80:E1")) {
                         leDeviceListAdapter.addDevice(result.getDevice());
                         leDeviceListAdapter.notifyDataSetChanged();
+                        numberOfScans = 0;
                     }
-                    System.out.println(leDeviceListAdapter.getCount());
-                    for (int i = 0; i < leDeviceListAdapter.getCount(); i++) {
-                        System.out.println(leDeviceListAdapter.getDevice(i).getAddress());
+                    if(numberOfScans > 30)
+                    {
+                        leDeviceListAdapter.clear();
+                        leDeviceListAdapter.notifyDataSetChanged();
                     }
+                    adapter.notifyDataSetChanged();
+
 
                 }
-            };
+               };
+
 }
