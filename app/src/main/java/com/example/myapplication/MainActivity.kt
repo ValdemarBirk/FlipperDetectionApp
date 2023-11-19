@@ -3,36 +3,58 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.API.WigleAPIService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
-        startActivity(Intent(this@MainActivity,BluetoothLEController::class.java ));
-        runBlocking {
-            launch {
-            val retrofitBuilder = Retrofit.Builder().baseUrl("https://api.wigle.net/api")
-                .addConverterFactory(GsonConverterFactory.create()).build()
-            val service = retrofitBuilder.create(WigleAPIService::class.java)
-            val currentMac = "";
-            val currentFlipper = service.getBLEDeviceHistory(currentMac, false, true, true)
+        // Check Bluetooth permission before starting BluetoothLEController
+        checkBluetoothPermission()
+    }
+
+    private fun checkBluetoothPermission() {
+        if (hasBluetoothPermission()) {
+            startBluetoothOperations()
+        } else {
+            // Request Bluetooth permission
+            requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_SCAN), BLUETOOTH_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun hasBluetoothPermission(): Boolean {
+        return checkSelfPermission(android.Manifest.permission.BLUETOOTH_SCAN) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == BLUETOOTH_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                startBluetoothOperations()
+            } else {
+                //handle not requested condition
             }
         }
-        /*
-                val bluetoothLEController : BluetoothLEController = BluetoothLEController();
-                bluetoothLEController.scanLeDevice();
+    }
 
+    private fun startBluetoothOperations() {
 
-         */
+        GlobalScope.launch(Dispatchers.IO) {
+            startActivity(Intent(this@MainActivity,BluetoothLEController::class.java ))
+
+        }
+    }
+
+    companion object {
+        private const val BLUETOOTH_PERMISSION_REQUEST_CODE = 1001
     }
 
 
+    /*        val bluetoothLEController : BluetoothLEController = BluetoothLEController();
+                bluetoothLEController.scanLeDevice();
 
-
+     */
 }

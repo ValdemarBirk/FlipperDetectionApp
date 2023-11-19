@@ -21,6 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import com.example.myapplication.API.GetDeviceData;
+import android.os.AsyncTask;
+
+
 @SuppressLint("MissingPermission")
 
 public class BluetoothLEController extends Activity {
@@ -48,6 +55,19 @@ public class BluetoothLEController extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        Button myButton = findViewById(R.id.myButton);
+
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_SHORT).show();
+                new GetDeviceDataTask().execute();
+
+            }
+        });
+
+
         bluetoothManager = this.getSystemService(BluetoothManager.class);
         bluetoothAdapter = bluetoothManager.getAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
@@ -61,6 +81,14 @@ public class BluetoothLEController extends Activity {
         scanLeDevice();
     }
 
+    private class GetDeviceDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            GetDeviceData getDeviceData = new GetDeviceData();
+            getDeviceData.FlipperData();
+            return null;
+        }
+    }
 
     public void scanLeDevice() {
         bluetoothLeScanner.startScan(leScanCallback);
