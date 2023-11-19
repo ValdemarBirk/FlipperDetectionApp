@@ -7,6 +7,7 @@ public class BLEDevice {
     private ArrayList<String> results = new ArrayList<>();
 
     public String getDevice(String mac_addr) {
+        System.out.println("results" + results);
         if(results.isEmpty()) {
             return "list is empty";
         }

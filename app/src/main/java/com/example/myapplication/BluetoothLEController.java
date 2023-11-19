@@ -15,7 +15,6 @@ import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 @SuppressLint("MissingPermission")
 
 public class BluetoothLEController extends Activity {
@@ -37,7 +36,6 @@ public class BluetoothLEController extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bluetoothManager = this.getSystemService(BluetoothManager.class);
         bluetoothAdapter = bluetoothManager.getAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
@@ -57,7 +55,6 @@ public class BluetoothLEController extends Activity {
             }
         });
     }
-
     private void startScanWithCountdown() {
         // Start the countdown timer
         countDownTimer = new CountDownTimer(SCAN_PERIOD, 1000) {
