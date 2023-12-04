@@ -15,8 +15,9 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.API.AroundME.GetSurroundingData;
-import android.os.AsyncTask;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 @SuppressLint("MissingPermission")
 
 public class BluetoothLEController extends Activity {
@@ -29,6 +30,7 @@ public class BluetoothLEController extends Activity {
     private boolean scanning;
     private Handler handler = new Handler();
     private static final long SCAN_PERIOD = 10000;
+    private int numberOfScans = 0;
 
     // Add a CountdownTimer
     private CountDownTimer countDownTimer;
@@ -57,6 +59,7 @@ public class BluetoothLEController extends Activity {
             }
         });
     }
+
     private void startScanWithCountdown() {
         // Start the countdown timer
         countDownTimer = new CountDownTimer(SCAN_PERIOD, 1000) {
@@ -77,13 +80,6 @@ public class BluetoothLEController extends Activity {
 
         // Start Bluetooth LE scan
         scanLeDevice();
-    }
-
-    private class GetDevicesAroundMeTask {
-                protected void callApi() {
-                GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0));
-                getSurroundingData.GetIntel();
-            }
     }
 
     public void scanLeDevice() {
@@ -107,4 +103,11 @@ public class BluetoothLEController extends Activity {
                     }
                 }
             };
+
+    private class GetDevicesAroundMeTask {
+        protected void callApi() {
+            GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0));
+            getSurroundingData.GetIntel();
+        }
+    }
 }
