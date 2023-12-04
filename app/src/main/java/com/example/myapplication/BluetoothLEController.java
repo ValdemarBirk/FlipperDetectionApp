@@ -66,6 +66,10 @@ public class BluetoothLEController extends Activity {
         bluetoothLeScanner.startScan(leScanCallback);
     }
 
+    public void stopLeDeviceScan(){
+        bluetoothLeScanner.stopScan(leScanCallback);
+    }
+
     private int numberOfScans = 0;
 
     // Device scan callback.
@@ -76,11 +80,17 @@ public class BluetoothLEController extends Activity {
                     super.onScanResult(callbackType, result);
                     numberOfScans++;
                     if(result.getDevice().getAddress().startsWith("80:E1")) {
+                        if(result.getDevice().getUuids() != null){
+                            for (int i = 0; i < result.getDevice().getUuids().length; i++) {
+                                System.out.println("UUID: " + result.getDevice().getUuids()[i]);
+                            }
+                        }
+
                         leDeviceListAdapter.addDevice(result.getDevice());
                         leDeviceListAdapter.notifyDataSetChanged();
                         numberOfScans = 0;
                     }
-                    if(numberOfScans > 30)
+                    if(numberOfScans > 500)
                     {
                         leDeviceListAdapter.clear();
                         leDeviceListAdapter.notifyDataSetChanged();

@@ -36,7 +36,6 @@ public class RecyclerViewAdapterFlipper extends RecyclerView.Adapter<RecyclerVie
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             String animal = mData.getDevice(position).getName();
-            System.out.println(animal);
             holder.myTextView.setText(animal);
         }
 
