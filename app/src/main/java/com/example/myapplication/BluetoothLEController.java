@@ -28,7 +28,6 @@ public class BluetoothLEController extends Activity {
     private boolean scanning;
     private Handler handler = new Handler();
     private static final long SCAN_PERIOD = 10000;
-    private int numberOfScans = 0;
 
     // Add a CountdownTimer
     private CountDownTimer countDownTimer;
@@ -96,17 +95,10 @@ public class BluetoothLEController extends Activity {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
                     super.onScanResult(callbackType, result);
-                    numberOfScans++;
                     if (result.getDevice().getAddress().startsWith("80:E1")) {
                         leDeviceListAdapter.addDevice(result.getDevice());
                         leDeviceListAdapter.notifyDataSetChanged();
-                        numberOfScans = 0;
                     }
-                    if (numberOfScans > 30) {
-                        leDeviceListAdapter.clear();
-                        leDeviceListAdapter.notifyDataSetChanged();
-                    }
-                    adapter.notifyDataSetChanged();
                 }
             };
 }
