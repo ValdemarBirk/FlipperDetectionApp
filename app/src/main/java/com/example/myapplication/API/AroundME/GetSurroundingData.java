@@ -1,36 +1,39 @@
-package com.example.myapplication.API;
+package com.example.myapplication.API.AroundME;
 
 import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import java.io.IOException;
 
-public class GetDeviceData {
+public class GetSurroundingData extends AppCompatActivity {
 
-    public void FlipperData() {
+    private void getIntel(double latitude, double longitude) {
         Retrofit retrofitBuilder = new Retrofit.Builder()
-            .baseUrl("https://api.wigle.net/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+                .baseUrl("https://api.wigle.net/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        WigleAPIService service = retrofitBuilder.create(WigleAPIService.class);
+        AroundMeService aroundMeservice = retrofitBuilder.create(AroundMeService.class);
 
-        String currentMac = "SOME RANDOM MAC ADDRESS";
+        String netId = "80:e1:26";
 
-        String authHeader = "Basic " + "INSERT YOUR TOKEN";
+        int lat = (int) latitude;
+
+        int lon = (int) longitude;
 
         // Make the network request asynchronously
-        Call<BLEDevice> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);
-
+        Call<FlippersAroundMe> FlippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(false,"40", "-74",netId,true,true
+        );
         try {
             // Execute the request synchronously
-            Response<BLEDevice> response = currentFlipper.execute();
+            Response<FlippersAroundMe> response = FlippersAroundMeWigle.execute();
 
             // Check if the request was successful
             if (response.isSuccessful()) {
-                BLEDevice responseBody = response.body();
+                FlippersAroundMe responseBody = response.body();
                 Log.d("API_CALL", "API call successful");
 
                 // Handle the response here, for example:
@@ -51,3 +54,4 @@ public class GetDeviceData {
         }
     }
 }
+

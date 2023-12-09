@@ -24,9 +24,10 @@ import java.util.Arrays;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.myapplication.API.AroundME.GetSurroundingData;
 import com.example.myapplication.API.GetDeviceData;
 import android.os.AsyncTask;
-
 
 @SuppressLint("MissingPermission")
 
@@ -58,6 +59,8 @@ public class BluetoothLEController extends Activity {
 
         Button myButton = findViewById(R.id.myButton);
 
+        Button aroundMeButton = findViewById(R.id.aroundMeButton);
+
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +69,16 @@ public class BluetoothLEController extends Activity {
 
             }
         });
+
+        aroundMeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_SHORT).show();
+                new GetDevicesAroundMeTask().execute();
+
+            }
+        });
+
 
 
         bluetoothManager = this.getSystemService(BluetoothManager.class);
@@ -86,6 +99,15 @@ public class BluetoothLEController extends Activity {
         protected Void doInBackground(Void... voids) {
             GetDeviceData getDeviceData = new GetDeviceData();
             getDeviceData.FlipperData();
+            return null;
+        }
+    }
+
+    private class GetDevicesAroundMeTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            GetSurroundingData getSurroundingData = new GetSurroundingData();
+
             return null;
         }
     }
