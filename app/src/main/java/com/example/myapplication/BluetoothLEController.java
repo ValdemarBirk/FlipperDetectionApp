@@ -12,9 +12,11 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.myapplication.API.AroundME.GetSurroundingData;
+import android.os.AsyncTask;
+
 @SuppressLint("MissingPermission")
 
 public class BluetoothLEController extends Activity {
@@ -75,6 +77,15 @@ public class BluetoothLEController extends Activity {
 
         // Start Bluetooth LE scan
         scanLeDevice();
+    }
+
+    private class GetDevicesAroundMeTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            GetSurroundingData getSurroundingData = new GetSurroundingData();
+
+            return null;
+        }
     }
 
     public void scanLeDevice() {
