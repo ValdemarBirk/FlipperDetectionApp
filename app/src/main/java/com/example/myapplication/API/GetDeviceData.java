@@ -17,9 +17,9 @@ public class GetDeviceData {
 
         WigleAPIService service = retrofitBuilder.create(WigleAPIService.class);
 
-        String currentMac = "SOME RANDOM MAC ADDRESS";
+        String currentMac = "80:e1:26";
 
-        String authHeader = "Basic " + "INSERT YOUR TOKEN";
+        String authHeader = "Basic " + "insert token";
 
         // Make the network request asynchronously
         Call<BLEDevice> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);

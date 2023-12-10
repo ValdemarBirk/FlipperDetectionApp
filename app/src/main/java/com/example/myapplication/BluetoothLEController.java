@@ -83,7 +83,7 @@ public class BluetoothLEController extends Activity {
         @Override
         protected Void doInBackground(Void... voids) {
             GetSurroundingData getSurroundingData = new GetSurroundingData();
-
+            getSurroundingData.GetIntel();
             return null;
         }
     }

@@ -8,9 +8,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GetSurroundingData extends AppCompatActivity {
+public class GetSurroundingData {
 
-    private void getIntel(double latitude, double longitude) {
+    public void GetIntel() {
         Retrofit retrofitBuilder = new Retrofit.Builder()
                 .baseUrl("https://api.wigle.net/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -18,18 +18,20 @@ public class GetSurroundingData extends AppCompatActivity {
 
         AroundMeService aroundMeservice = retrofitBuilder.create(AroundMeService.class);
 
+        String auth = "Basic " + "insert your token";
+
         String netId = "80:e1:26";
 
-        int lat = (int) latitude;
+        int lat = 40;
 
-        int lon = (int) longitude;
+        int lon = -74;
 
         // Make the network request asynchronously
-        Call<FlippersAroundMe> FlippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(false,"40", "-74",netId,true,true
+        Call<FlippersAroundMe> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false,"40", "-74",netId,true,true
         );
         try {
             // Execute the request synchronously
-            Response<FlippersAroundMe> response = FlippersAroundMeWigle.execute();
+            Response<FlippersAroundMe> response = flippersAroundMeWigle.execute();
 
             // Check if the request was successful
             if (response.isSuccessful()) {
