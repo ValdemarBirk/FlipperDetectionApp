@@ -7,9 +7,11 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.myapplication.API.AroundME.LocationPermissionManager;
 
 public class GetSurroundingData {
 
+    private LocationPermissionManager permissionManager;
     public void GetIntel() {
         Retrofit retrofitBuilder = new Retrofit.Builder()
                 .baseUrl("https://api.wigle.net/")
@@ -18,16 +20,18 @@ public class GetSurroundingData {
 
         AroundMeService aroundMeservice = retrofitBuilder.create(AroundMeService.class);
 
-        String auth = "Basic " + "insert your token";
+        String auth = "Basic " + "INSERT YOUR TOKEN";
 
         String netId = "80:e1:26";
 
-        int lat = 40;
+        String lat = permissionManager.Globallatitude;
 
-        int lon = -74;
+        String lon = permissionManager.Globallongitude;
+
+        Log.d("LocationUpdateReceived", "Latitude: " + lat + ", Longitude: " + lon);
 
         // Make the network request asynchronously
-        Call<FlippersAroundMe> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false,"40", "-74",netId,true,true
+        Call<FlippersAroundMe> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false, "40", "-74",netId,true,true, "10"
         );
         try {
             // Execute the request synchronously

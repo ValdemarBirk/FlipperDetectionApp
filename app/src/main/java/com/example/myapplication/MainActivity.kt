@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
+import com.example.myapplication.API.AroundME.LocationPermissionManager;
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var permissionManager: LocationPermissionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Check Bluetooth permission before starting BluetoothLEController
+        permissionManager = LocationPermissionManager(this)
+        permissionManager.checkLocationPermission()
         checkBluetoothPermission()
     }
 

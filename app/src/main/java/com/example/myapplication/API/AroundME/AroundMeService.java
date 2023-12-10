@@ -14,6 +14,7 @@ public interface AroundMeService {
             @Query("closestLong") String longitude,
             @Query("netid") String mac_addr,
             @Query("showBt") boolean showBt,
-            @Query("showBle") boolean showBle
+            @Query("showBle") boolean showBle,
+            @Query("resultsPerPage") String resultsPerPage
     );
 }
