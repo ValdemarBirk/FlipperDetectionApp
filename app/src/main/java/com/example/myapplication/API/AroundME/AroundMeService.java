@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 public interface AroundMeService {
     @GET("api/v2/bluetooth/search?")
     Call<FlippersAroundMe> getDevicesAroundMe(
+            @Header("Authorization") String authorizationHeader,
             @Query("onlymine") boolean onlymine,
             @Query("closestLat") String latitude,
             @Query("closestLong") String longitude,
