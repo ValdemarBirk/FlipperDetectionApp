@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import android.util.Log;
 
 public class LocationPermissionManager {
 
@@ -18,6 +19,10 @@ public class LocationPermissionManager {
     private AppCompatActivity activity;
     private LocationManager locationManager;
     private LocationListener locationListener;
+
+    public String Globallatitude;
+
+    public String Globallongitude;
 
     public LocationPermissionManager(AppCompatActivity activity) {
         this.activity = activity;
@@ -28,7 +33,10 @@ public class LocationPermissionManager {
                 if (location != null) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
+                    Globallatitude = String.valueOf(latitude);
+                    Globallongitude = String.valueOf(longitude);
                     // Perform operations with latitude and longitude
+                    stopLocationUpdates();
                 }
             }
 
@@ -36,9 +44,28 @@ public class LocationPermissionManager {
         };
     }
 
+    public void requestSingleLocationUpdate() {
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        Log.d("LocationUpdate", "Latitude: " + latitude + ", Longitude: " + longitude);
+                        // Perform operations with latitude and longitude
+                        stopLocationUpdates();
+                    }
+                }
+
+                // Other overridden methods of LocationListener as needed
+            }, null);
+        }
+    }
+
     public void checkLocationPermission() {
         if (hasLocationPermission()) {
-            requestLocationUpdates();
+            requestSingleLocationUpdate();
         } else {
             requestLocationPermission();
         }
