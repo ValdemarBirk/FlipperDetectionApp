@@ -74,7 +74,7 @@ public class BluetoothLEController extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_SHORT).show();
-                new GetDevicesAroundMeTask().execute();
+                new GetDevicesAroundMeTask().callApi();
 
             }
         });
@@ -103,13 +103,11 @@ public class BluetoothLEController extends Activity {
         }
     }
 
-    private class GetDevicesAroundMeTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            GetSurroundingData getSurroundingData = new GetSurroundingData();
-            getSurroundingData.GetIntel();
-            return null;
-        }
+    private class GetDevicesAroundMeTask {
+                protected void callApi() {
+                GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0));
+                getSurroundingData.GetIntel();
+            }
     }
 
     public void scanLeDevice() {

@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         // Check Bluetooth permission before starting BluetoothLEController
         permissionManager = LocationPermissionManager(this)
         permissionManager.checkLocationPermission()
+        permissionManager.requestSingleLocationUpdate()
         checkBluetoothPermission()
     }
 
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             startActivity(Intent(this@MainActivity,BluetoothLEController::class.java ))
-
+            val locationData = Intent(this@MainActivity, BluetoothLEController::class.java)
+            locationData.putExtra("lat", permissionManager.Globallatitude)
+            locationData.putExtra("lon", permissionManager.Globallongitude)
         }
     }
 
