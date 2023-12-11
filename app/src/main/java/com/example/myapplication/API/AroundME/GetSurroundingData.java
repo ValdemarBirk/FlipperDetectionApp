@@ -42,28 +42,21 @@ public class GetSurroundingData {
         Log.d("LocationUpdateReceived", "Latitude: " + lat + ", Longitude: " + lon);
 
         // Make the network request asynchronously
-        Call<FlippersAroundMe> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false, "40", "-74",netId,true,true, "10"
+        Call<NearbyFlipper> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false, "40", "-74",netId,true,true, "10"
         );
-        flippersAroundMeWigle.enqueue(new Callback<FlippersAroundMe>() {
+        flippersAroundMeWigle.enqueue(new Callback<NearbyFlipper>() {
             @Override
-            public void onResponse(Call<FlippersAroundMe> call, Response<FlippersAroundMe> response) {
+            public void onResponse(Call<NearbyFlipper> call, Response<NearbyFlipper> response) {
                     // Check if the request was successful
                     if (response.isSuccessful()) {
-                        FlippersAroundMe responseBody = response.body();
+                        //FlippersAroundMe responseBody = response.body();
+                        NearbyFlipper responseBody = response.body();
                         Log.d("API_CALL", "API call successful");
-
+                        Log.d("API_TEST", String.valueOf(response.body()));
                         // Handle the response here, for example:
-                        if (responseBody != null) {
-                            try {
-                                JSONObject response_json = new JSONObject(response.body().toString());
-                                Object test = response_json.get("totalResults");
-                                Log.i("JSON Test", (String) test);
-                            } catch (JSONException e) {
-                                Log.e("API_CALL", e.getMessage());
-                            }
+                        if (response.body() != null) {
+                                Log.i("API_TEST", response.body().toString());
                             // Do something with the response
-                            System.out.println(responseBody);
-                            System.out.println("hi"); // or any other operation you want to perform
                         }
                     } else {
                         // Handle unsuccessful request (e.g., error response)
@@ -73,7 +66,7 @@ public class GetSurroundingData {
                     }
             }
             @Override
-            public void onFailure(Call<FlippersAroundMe> call, Throwable t) {
+            public void onFailure(Call<NearbyFlipper> call, Throwable t) {
                 Log.e("API_CALL", "Exception: " + t.getMessage());
             }
         });

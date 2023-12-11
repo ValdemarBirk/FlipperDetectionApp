@@ -1,6 +1,9 @@
 package com.example.myapplication.API;
 
 import android.util.Log;
+
+import com.example.myapplication.API.AroundME.NearbyFlipper;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -22,15 +25,15 @@ public class GetDeviceData {
         String authHeader = "Basic " + "INSERT YOUR TOKEN";
 
         // Make the network request asynchronously
-        Call<BLEDevice> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);
+        Call<NearbyFlipper> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);
 
         try {
             // Execute the request synchronously
-            Response<BLEDevice> response = currentFlipper.execute();
+            Response<NearbyFlipper> response = currentFlipper.execute();
 
             // Check if the request was successful
             if (response.isSuccessful()) {
-                BLEDevice responseBody = response.body();
+                NearbyFlipper responseBody = response.body();
                 Log.d("API_CALL", "API call successful");
 
                 // Handle the response here, for example:
