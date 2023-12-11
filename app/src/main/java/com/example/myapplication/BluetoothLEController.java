@@ -79,13 +79,11 @@ public class BluetoothLEController extends Activity {
         scanLeDevice();
     }
 
-    private class GetDevicesAroundMeTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            GetSurroundingData getSurroundingData = new GetSurroundingData();
-            getSurroundingData.GetIntel();
-            return null;
-        }
+    private class GetDevicesAroundMeTask {
+                protected void callApi() {
+                GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0));
+                getSurroundingData.GetIntel();
+            }
     }
 
     public void scanLeDevice() {
