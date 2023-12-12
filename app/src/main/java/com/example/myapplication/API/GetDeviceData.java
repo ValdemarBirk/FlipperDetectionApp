@@ -27,7 +27,7 @@ public class GetDeviceData {
 
         String currentMac = "MAC address";
 
-        String authHeader = "Basic " + "TOKEN";
+        String authHeader = "Basic " + "INSERT YOUR TOKEN";
 
         // Make the network request asynchronously
         Call<NearbyFlipper> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);

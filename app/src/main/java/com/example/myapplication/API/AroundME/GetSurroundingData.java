@@ -2,6 +2,7 @@ package com.example.myapplication.API.AroundME;
 
 import android.util.Log;
 
+import com.example.myapplication.API.DeviceDataCallback;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -21,10 +22,12 @@ public class GetSurroundingData {
 
     public String lon = "";
 
+    private DeviceDataCallback callback;
 
-    public GetSurroundingData(double lat, double lon) {
+    public GetSurroundingData(double lat, double lon, DeviceDataCallback callback ) {
         this.lat = Double.toString(lat);
         this.lon = Double.toString(lon);
+        this.callback = callback;
     }
     public void GetIntel() {
 
@@ -35,14 +38,14 @@ public class GetSurroundingData {
 
         AroundMeService aroundMeservice = retrofitBuilder.create(AroundMeService.class);
 
-        String auth = "Basic " + "TOKEN";
+        String auth = "Basic " + "INSERT YOUR TOKEN";
 
         String netId = "80:e1:26";
 
         Log.d("LocationUpdateReceived", "Latitude: " + lat + ", Longitude: " + lon);
 
         // Make the network request asynchronously
-        Call<NearbyFlipper> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false, "40", "-74",netId,true,true, "10"
+        Call<NearbyFlipper> flippersAroundMeWigle = aroundMeservice.getDevicesAroundMe(auth, false, lat, lon,netId,true,true, "10"
         );
         flippersAroundMeWigle.enqueue(new Callback<NearbyFlipper>() {
             @Override
@@ -55,7 +58,8 @@ public class GetSurroundingData {
                         Log.d("API_TEST", String.valueOf(response.body()));
                         // Handle the response here, for example:
                         if (response.body() != null) {
-                                Log.i("API_TEST", response.body().toString());
+                            callback.onDeviceDataFetched(responseBody);
+                            Log.i("API_TEST", response.body().toString());
                             // Do something with the response
                         }
                     } else {

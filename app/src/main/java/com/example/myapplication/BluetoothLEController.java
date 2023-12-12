@@ -100,6 +100,7 @@ public class BluetoothLEController extends Activity implements DeviceDataCallbac
 
     @Override
     public void onDeviceDataFetched(NearbyFlipper nearbyFlipper) {
+        Log.d("callback is working", "onDeviceDataFetched: "+ nearbyFlipper);
         Intent intent = new Intent(BluetoothLEController.this, DisplayApiResultsActivity.class);
         intent.putExtra("fetchedData", nearbyFlipper);
         startActivity(intent);
@@ -114,7 +115,7 @@ public class BluetoothLEController extends Activity implements DeviceDataCallbac
 
     private class GetDevicesAroundMeTask {
                 protected void callApi() {
-                GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0));
+                GetSurroundingData getSurroundingData = new GetSurroundingData(getIntent().getDoubleExtra("lat", 0), getIntent().getDoubleExtra("lon", 0), BluetoothLEController.this);
                 getSurroundingData.GetIntel();
             }
     }
