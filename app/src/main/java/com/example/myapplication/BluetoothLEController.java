@@ -10,6 +10,7 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,17 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.API.AroundME.GetSurroundingData;
+import com.example.myapplication.API.AroundME.NearbyFlipper;
+import com.example.myapplication.API.DeviceDataCallback;
 import com.example.myapplication.API.GetDeviceData;
 import android.os.AsyncTask;
 
 @SuppressLint("MissingPermission")
 
-public class BluetoothLEController extends Activity {
+public class BluetoothLEController extends Activity implements DeviceDataCallback {
 
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;
@@ -65,7 +69,7 @@ public class BluetoothLEController extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "button clicked", Toast.LENGTH_SHORT).show();
-                new GetDeviceDataTask().execute();
+                new GetDeviceDataTask().callDeviceDataApi();
 
             }
         });
@@ -94,12 +98,17 @@ public class BluetoothLEController extends Activity {
         scanLeDevice();
     }
 
-    private class GetDeviceDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            GetDeviceData getDeviceData = new GetDeviceData();
+    @Override
+    public void onDeviceDataFetched(NearbyFlipper nearbyFlipper) {
+        Intent intent = new Intent(BluetoothLEController.this, DisplayApiResultsActivity.class);
+        intent.putExtra("fetchedData", nearbyFlipper);
+        startActivity(intent);
+    }
+
+    private class GetDeviceDataTask {
+        protected void callDeviceDataApi() {
+            GetDeviceData getDeviceData = new GetDeviceData(BluetoothLEController.this);
             getDeviceData.FlipperData();
-            return null;
         }
     }
 

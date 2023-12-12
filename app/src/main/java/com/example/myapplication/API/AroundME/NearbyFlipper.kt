@@ -1,5 +1,7 @@
 package com.example.myapplication.API.AroundME
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -12,8 +14,44 @@ data class NearbyFlipper(
     @Json(name = "resultCount") val resultCount: Int,
     @Json(name = "results") val results: List<WiFiNetwork>,
     @Json(name = "searchAfter") val searchAfter: String,
-    @Json(name = "search_after") val searchAfterAlt: Int // Assuming this is an Int value, adjust if it's different
-)
+    @Json(name = "search_after") val searchAfterAlt: String // Assuming this is an Int value, adjust if it's different
+): Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.createTypedArrayList(WiFiNetwork.CREATOR) ?: ArrayList(),
+        parcel.readString() ?: "",
+        parcel.readString() ?: ""
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeByte(if (success) 1 else 0)
+        parcel.writeInt(totalResults)
+        parcel.writeInt(first)
+        parcel.writeInt(last)
+        parcel.writeInt(resultCount)
+        parcel.writeTypedList(results)
+        parcel.writeString(searchAfter)
+        parcel.writeString(searchAfterAlt)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<NearbyFlipper> {
+        override fun createFromParcel(parcel: Parcel): NearbyFlipper {
+            return NearbyFlipper(parcel)
+        }
+
+        override fun newArray(size: Int): Array<NearbyFlipper?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 @JsonClass(generateAdapter = true)
 data class WiFiNetwork(
@@ -37,4 +75,64 @@ data class WiFiNetwork(
     @Json(name = "city") val city: String?,
     @Json(name = "housenumber") val housenumber: String?,
     @Json(name = "postalcode") val postalcode: String
-)
+): Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readDouble(),
+        parcel.readDouble(),
+        parcel.readString() ?: "",
+        parcel.readInt(),
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.createStringArrayList() ?: arrayListOf(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: ""
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeDouble(trilat)
+        parcel.writeDouble(trilong)
+        parcel.writeString(ssid)
+        parcel.writeInt(qos)
+        parcel.writeString(transid)
+        parcel.writeString(firsttime)
+        parcel.writeString(lasttime)
+        parcel.writeString(lastupdt)
+        parcel.writeString(netid)
+        parcel.writeString(type)
+        parcel.writeStringList(capabilities)
+        parcel.writeByte(if (userfound) 1 else 0)
+        parcel.writeInt(device)
+        parcel.writeString(name)
+        parcel.writeString(country)
+        parcel.writeString(region)
+        parcel.writeString(road)
+        parcel.writeString(city)
+        parcel.writeString(housenumber)
+        parcel.writeString(postalcode)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<WiFiNetwork> {
+        override fun createFromParcel(parcel: Parcel): WiFiNetwork {
+            return WiFiNetwork(parcel)
+        }
+
+        override fun newArray(size: Int): Array<WiFiNetwork?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

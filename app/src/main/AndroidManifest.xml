@@ -45,6 +45,10 @@
             android:exported="true">
             <!--Default Intent Filter-->
         </activity>
+        <activity android:name=".DisplayApiResultsActivity"
+            android:exported="true">
+            <!--Default Intent Filter-->
+        </activity>
     <!--Add Other activities like this-->
 
     </application>
