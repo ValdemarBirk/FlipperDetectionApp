@@ -12,6 +12,20 @@
         layout="@layout/top_nav_bar"/>
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flipper_detection_tool"
+        android:textAlignment="center"
+        android:textColor="#FEFEFE"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
+        android:layout_marginTop="10dp"/>
+
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="0dp"
@@ -25,20 +39,6 @@
         android:src="@drawable/sharkdvour"
         android:visibility="visible"
         android:alpha="0.05"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/flipper_detection_tool"
-        android:textAlignment="center"
-        android:textColor="#FEFEFE"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
