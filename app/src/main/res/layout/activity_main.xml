@@ -12,6 +12,20 @@
         layout="@layout/top_nav_bar"/>
 
 
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="0dp"
+        android:src="@drawable/sharkdvour"
+        android:visibility="visible"
+        android:alpha="0.05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -20,25 +34,6 @@
         android:textAlignment="center"
         android:textColor="#FEFEFE"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
-        android:layout_marginTop="10dp"/>
-
-    <ImageView
-        android:id="@+id/Logo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/flipper_detection_tool"
-        android:textAlignment="center"
-        android:textColor="#FEFEFE"
-        android:textSize="16sp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:src="@drawable/sharkdvour"
-        android:visibility="visible"
-        android:alpha="0.05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +62,7 @@
         android:text="Start Scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/flippersFoundRecycler"
@@ -83,26 +76,5 @@
         app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
         app:layout_constraintVertical_bias="0.407" />
 
-
-    <Button
-        android:id="@+id/myButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="448dp"
-        android:text="Get Device Data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/aroundMeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="504dp"
-        android:text="Around me"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
