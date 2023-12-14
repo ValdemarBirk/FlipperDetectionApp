@@ -52,7 +52,7 @@ public class BluetoothLEController extends Activity {
         scanButton = findViewById(R.id.startScanButton);
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startScanWithCountdown();
             }
         });
@@ -97,7 +97,7 @@ public class BluetoothLEController extends Activity {
                     super.onScanResult(callbackType, result);
                     if (result.getDevice().getAddress().startsWith("80:E1")) {
                         leDeviceListAdapter.addDevice(result.getDevice());
-                        leDeviceListAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                 }
             };
