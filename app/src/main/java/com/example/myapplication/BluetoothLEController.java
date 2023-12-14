@@ -12,6 +12,8 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.API.AroundME.GetSurroundingData;
@@ -38,6 +40,7 @@ public class BluetoothLEController extends Activity {
     private Button scanButton;
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bluetoothManager = this.getSystemService(BluetoothManager.class);

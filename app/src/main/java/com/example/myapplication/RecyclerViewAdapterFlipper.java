@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,13 @@ public class RecyclerViewAdapterFlipper extends RecyclerView.Adapter<RecyclerVie
                 super(itemView);
                 myTextView = itemView.findViewById(R.id.tvFlipperName);
                 itemView.setOnClickListener(this);
+                myTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent MACLookUp = new Intent(itemView.getContext(), MACView.class);
+                        itemView.getContext().startActivity(MACLookUp);
+                    }
+                });
             }
 
             @Override
