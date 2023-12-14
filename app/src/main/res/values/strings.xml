@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">D-Vour</string>
+    <string name="flipper_detection_tool">THE FLIPPER DETECTION TOOL</string>
 </resources>
