@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -100,6 +101,10 @@ public class BluetoothLEController extends Activity {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
                     super.onScanResult(callbackType, result);
+                    BluetoothDevice device = result.getDevice();
+                    String deviceAddress = device.getAddress();
+                    String deviceName = device.getName();
+
                     if (result.getDevice().getAddress().startsWith("80:E1")) {
                         leDeviceListAdapter.addDevice(result.getDevice());
                         adapter.notifyDataSetChanged();

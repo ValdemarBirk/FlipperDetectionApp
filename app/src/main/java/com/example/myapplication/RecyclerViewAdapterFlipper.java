@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -67,7 +68,20 @@ public class RecyclerViewAdapterFlipper extends RecyclerView.Adapter<RecyclerVie
 
             @Override
             public void onClick(View view) {
-                if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+                if (mClickListener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        BluetoothDevice clickedDevice = mData.getDevice(position);
+                        String deviceAddress = clickedDevice.getAddress();
+                        String deviceName = clickedDevice.getName();
+
+                        Intent MACLookUp = new Intent(itemView.getContext(), MACView.class);
+                        MACLookUp.putExtra("flipper", deviceName);
+                        MACLookUp.putExtra("deviceAddress", deviceAddress);
+                        itemView.getContext().startActivity(MACLookUp);
+                    }
+                }
+                   // mClickListener.onItemClick(view, getAdapterPosition());
             }
         }
 

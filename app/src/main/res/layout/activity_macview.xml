@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#1E1E1E">
+
+    <include
+        android:id="@+id/top_nav_bar"
+        layout="@layout/top_nav_bar"/>
+
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="0dp"
+        android:src="@drawable/sharkdvour"
+        android:visibility="visible"
+        android:alpha="0.05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        app:backgroundTint="#373737"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:ignore="BottomAppBar" />
+
+    <!-- Essentially this shal be our back button!
+     <Button
+         android:id="@+id/startScanButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:clickable="true"
+         android:focusable="true"
+         android:fontFamily="sans-serif"
+         android:text="Start Scan"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent" />
+ -->
+    <TextView
+        android:id="@+id/macAddressTextView"
+        android:layout_width="match_parent"
+        android:layout_height="406dp"
+        android:layout_marginTop="68dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
+        app:layout_constraintVertical_bias="0.407"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
