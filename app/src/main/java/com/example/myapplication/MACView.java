@@ -23,7 +23,7 @@ public class MACView extends Activity {
 
         // Get the friendly name and MAC address from the intent
         String flipperName = getIntent().getStringExtra("flipper");
-        String deviceAddress = getIntent().getStringExtra("deviceAddress");
+        String deviceAddress = getIntent().getStringExtra("Mac");
 
         // Display the friendly name and MAC address in the TextView
         macAddressTextView.setText("Device Information:\nFriendly Name: " + flipperName + "\nMAC Address: " + deviceAddress);

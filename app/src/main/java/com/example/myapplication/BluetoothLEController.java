@@ -39,7 +39,6 @@ public class BluetoothLEController extends Activity {
 
     // Add a CountdownTimer
     private CountDownTimer countDownTimer;
-
     private Button scanButton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +73,8 @@ public class BluetoothLEController extends Activity {
     }
 
     private void startScanWithCountdown() {
+        // disabling the scan button to prevent multiple scans
+        scanButton.setEnabled(false);
         // Start the countdown timer
         countDownTimer = new CountDownTimer(SCAN_PERIOD, 1000) {
             @SuppressLint("SetTextI18n")
@@ -88,6 +89,8 @@ public class BluetoothLEController extends Activity {
                 scanButton.setText("Start Scan");
                 // Stop scanning
                 stopScan();
+                //re-enable scan button
+                scanButton.setEnabled(true);
             }
         }.start();
 

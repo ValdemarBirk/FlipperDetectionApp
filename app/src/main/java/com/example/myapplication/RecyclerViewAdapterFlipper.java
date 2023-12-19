@@ -60,8 +60,11 @@ public class RecyclerViewAdapterFlipper extends RecyclerView.Adapter<RecyclerVie
                 myTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent MACLookUp = new Intent(itemView.getContext(), MACView.class).putExtra("flipper", myTextView.getText().toString());
-                        itemView.getContext().startActivity(MACLookUp);
+                        Intent Friendlyname = new Intent(itemView.getContext(), MACView.class).putExtra("flipper", myTextView.getText().toString());
+                        int position = getAdapterPosition();
+                        String currentMAC = mData.getDevice(position).getAddress();
+                        Friendlyname.putExtra("Mac", currentMAC);
+                        itemView.getContext().startActivity(Friendlyname);
                     }
                 });
             }
