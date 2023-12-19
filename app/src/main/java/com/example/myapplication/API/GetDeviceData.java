@@ -10,9 +10,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
+
 public class GetDeviceData {
 
-    public void FlipperData() {
+    String currentMac = "INSERT MAC ADDRESS";
+
+    String authHeader = "Basic " + "INSERT YOUR TOKEN";
+    public NearbyFlipper FlipperData() {
         Retrofit retrofitBuilder = new Retrofit.Builder()
             .baseUrl("https://api.wigle.net/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -20,9 +24,7 @@ public class GetDeviceData {
 
         WigleAPIService service = retrofitBuilder.create(WigleAPIService.class);
 
-        String currentMac = "INSERT MAC ADDRESS";
 
-        String authHeader = "Basic " + "INSERT YOUR TOKEN";
 
         // Make the network request asynchronously
         Call<NearbyFlipper> currentFlipper = service.getBLEDeviceHistory(authHeader, currentMac, false, true, true);
@@ -41,6 +43,7 @@ public class GetDeviceData {
                     // Do something with the response
                     System.out.println(responseBody);
                     System.out.println("hi"); // or any other operation you want to perform
+                    return responseBody;
                 }
             } else {
                 // Handle unsuccessful request (e.g., error response)
@@ -52,5 +55,13 @@ public class GetDeviceData {
             // Handle exceptions if any occur during the request
             Log.e("API_CALL", "Exception: " + e.getMessage());
         }
+        return null;
+    }
+    public void setMac(String macAddress) {
+        this.currentMac = macAddress;
+    }
+
+    public void setAuthHeader(String auth) {
+        this.authHeader = auth;
     }
 }

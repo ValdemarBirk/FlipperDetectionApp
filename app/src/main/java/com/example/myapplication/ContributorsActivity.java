@@ -16,7 +16,7 @@ public class ContributorsActivity extends Activity {
         TextView contributorsTextView = findViewById(R.id.Contributors);
 
         String contributorsInfo = "Linaex Joseph Vigneshwar Anandhamuruga\nPhilip Bilbo\nNick B. Blume\nValdemar Nørup Birk\nAlexander Victor Dybendal Koefoed \nJacob Sylvest Krab-Johansen\n"; // Add your contributor names here
-        String specialThanks = "Shreyas Srinivasa, Ph.D.";
+        String specialThanks = "Shreyas Srinivasa, Ph.D. \nEdlira Dushku, Professor in CS at AAU";
         contributorsTextView.setText("Contributors: \n" + contributorsInfo + "\nSpecial thanks to: \n" + specialThanks);
 
         Button backButton = findViewById(R.id.backButton_2);
