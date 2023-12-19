@@ -51,6 +51,10 @@
         </activity>
     <!--Add Other activities like this-->
 
+        <activity android:name=".ContributorsActivity"
+            android:exported="true">
+            <!--Default Intent Filter-->
+        </activity>
     </application>
 
 </manifest>

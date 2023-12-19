@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#373737"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/shark_dvour_cropped"
@@ -28,6 +29,19 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/burgermenu" />
+        android:src="@drawable/burgermenu"
+        android:clickable="true"
+        android:onClick="showPopupMenu" />
+
+    <ImageButton
+        android:id="@+id/dropdownMenuButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/transparent_image"
+        android:background="#0000"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+
+        />
 
 </RelativeLayout>

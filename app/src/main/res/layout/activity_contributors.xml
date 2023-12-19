@@ -11,6 +11,7 @@
         android:id="@+id/top_nav_bar"
         layout="@layout/top_nav_bar"/>
 
+
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="0dp"
@@ -25,7 +26,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Application Contributors"
+        android:textAlignment="center"
+        android:textColor="#FEFEFE"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
+        android:layout_marginTop="10dp"/>
 
+
+    <TextView
+        android:id="@+id/Contributors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Application Contributors"
+        android:textAlignment="textStart"
+        android:textColor="#FEFEFE"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -36,9 +63,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="1dp"
         tools:ignore="BottomAppBar" />
-
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/backButton_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -49,32 +75,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Essentially this shal be our back button!
-     <Button
-         android:id="@+id/startScanButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:clickable="true"
-         android:focusable="true"
-         android:fontFamily="sans-serif"
-         android:text="Start Scan"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent" />
- -->
-    <TextView
-        android:id="@+id/macAddressTextView"
-        android:layout_width="match_parent"
-        android:layout_height="406dp"
-        android:layout_marginTop="68dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_nav_bar"
-        app:layout_constraintVertical_bias="0.407"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

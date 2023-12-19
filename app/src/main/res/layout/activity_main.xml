@@ -59,7 +59,7 @@
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="sans-serif"
-        android:text="Start Scan"
+        android:text="SCAN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
