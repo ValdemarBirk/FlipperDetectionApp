@@ -64,7 +64,7 @@ public class RecyclerViewAdapterFlipper extends RecyclerView.Adapter<RecyclerVie
                         int position = getAdapterPosition();
                         String currentMAC = mData.getDevice(position).getAddress();
                         Friendlyname.putExtra("Mac", currentMAC);
-                        Friendlyname.putExtra("auth", "Basic QUlEYmE2YWY0ZGRiYTlmYWQ0M2FjOWY4NTNkOThlY2FlZWQ6MjY4YzRkNzk2ZWMxMGY0ZTBhOWFiMDc0YzFlZGNkZDA=");
+                        Friendlyname.putExtra("auth", "Basic");
                         itemView.getContext().startActivity(Friendlyname);
                     }
                 });
